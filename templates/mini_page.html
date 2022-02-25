@@ -1,0 +1,63 @@
+{%extends 'base.html'%}
+{%block body%}
+<div class="container">
+    <form method="POST" action="/data2">
+      <div class="mb-3">
+          <label  for="Search" class="form-label">Enter the movie :</label>
+          <input list="Search1"  name="Search" placeholder="Enter the  movie name here" size=60>
+          <datalist id="Search1">
+            {%for i in range(all|length)%}
+            <option value="{{all[i]}}">{{all[i]}}</option>
+            {%endfor%}
+          </datalist>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Search"> 
+    </form>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <h3 >TOP PICKS</h3>
+        <br/>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Sno</th>
+                <th scope="col">Movie_Name</th>
+                <th scope="col">Rating/10</th>
+                <th scope="col">Genre</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for i in range(0,10) %}
+                <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td class="fw-bold">{{top_movies[i]}}</td>
+                <td>{{"%.1f"|format(top_rate[i])}}</td>
+                {% for gen in top_genres[i]  %}
+                <td> {{gen|join(",")}}</td>
+                {% endfor %}
+               
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <br/>
+          <br>
+          <div class="btn-group" role="group">
+          <form action='/gen'>
+            <div>
+            <button class="btn btn-primary ">By_Genre</button>
+          </div>
+        </form>
+        <br>
+        <br>
+        <form action='/date'>
+            <div>
+            <button class="btn btn-dark" >By_Year </button>
+            </div>
+        </form>
+        <br/>
+      </div>
+{%endblock body%}
+  

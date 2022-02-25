@@ -1,0 +1,36 @@
+{%extends 'base.html'%}
+{%block body%}
+    <form method="POST" action="/data1">
+        <div>
+            <label id="a">Enter the year:</label>
+            <input type="text" name="years" placeholder="Enter between 1916 and 2017" size=30>
+        </div>
+        <br/>
+        <input class="btn btn-primary" type="submit" value="Search" id="a"> 
+    </form>
+    <br>
+    <br>
+    <div class="container">
+        <h3>Movies</h3>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Sno</th>
+                <th scope="col">Movie_Name</th>
+                <th scope="col">Rating/10</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for i in range(movies|length)  %}
+                <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{movies[i]}}</td>
+                <td>{{"%.1f"|format(rate[i])}}</td>
+                <td><a href="/detail/{{movies[i]}}" type="button" class="btn btn-outline-dark btn-sm mx-1" style="font-weight: bold;">Detail</button></td>
+              </tr>
+              {% endfor %}  
+            </tbody>
+          </table>
+    </div>
+{%endblock body%}
